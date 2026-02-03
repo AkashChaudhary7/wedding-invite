@@ -2,441 +2,335 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Akash Singh & Tanu Chaudhary | Wedding</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Divyansh & Trishna | Wedding Invitation</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     
     <style>
-        /* --- 1. Fonts & Variables --- */
-        /* 'Allura' is a very elegant cursive font */
-        @import url('https://fonts.googleapis.com/css2?family=Allura&family=Cinzel:wght@400;600&family=Jost:wght@300;400;500&display=swap');
+        /* --- 1. FONTS & VARIABLES --- */
+        /* Added 'Pinyon Script' for a more Royal/Premium look */
+        @import url('https://fonts.googleapis.com/css2?family=Pinyon+Script&family=Cinzel:wght@400;600&family=Lato:wght@300;400;700&display=swap');
 
         :root {
-            --bg-gradient: linear-gradient(135deg, #FFF0F5 0%, #FFF8E1 100%);
-            --primary-color: #B76E79; /* Rose Gold */
-            --accent-color: #D4AF37; /* Metallic Gold */
-            --text-cursive: 'Allura', cursive;
-            --text-formal: 'Cinzel', serif;
-            --text-body: 'Jost', sans-serif;
-            --glass-panel: rgba(255, 255, 255, 0.6);
+            --gold: #D4AF37;
+            --gold-light: #F4E4C1;
+            --pastel-bg: #FFF0F5; /* Lavender Blush */
+            --text-main: #5D4037;
+            
+            /* Fonts */
+            --font-cursive: 'Pinyon Script', cursive; /* NEW ROYAL FONT */
+            --font-royal: 'Cinzel', serif;
+            --font-body: 'Lato', sans-serif;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
-            font-family: var(--text-body);
-            background: var(--bg-gradient);
-            height: 100vh;
-            width: 100vw;
-            overflow: hidden; /* NO SCROLLING */
-            color: #5D4037;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            font-family: var(--font-body);
+            background-color: var(--pastel-bg);
+            color: var(--text-main);
+            overflow-x: hidden;
             position: relative;
         }
 
-        /* --- Floating Sparkles Animation --- */
-        .sparkle {
+        /* --- 2. DECORATIONS --- */
+        
+        /* Golden Side Borders */
+        body::before, body::after {
+            content: '';
+            position: fixed; top: 0; bottom: 0; width: 15px;
+            background-image: url("data:image/svg+xml,%3Csvg width='20' height='20' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1h2v2H1V1zm4 4h2v2H5V5zm4 4h2v2H9V9zm4 4h2v2h-2v-2zm4 4h2v2h-2v-2z' fill='%23D4AF37' fill-opacity='0.4' fill-rule='evenodd'/%3E%3C/svg%3E");
+            z-index: 1000;
+        }
+        body::before { left: 0; border-right: 2px solid var(--gold); }
+        body::after { right: 0; border-left: 2px solid var(--gold); }
+
+        /* Live Background Particles */
+        .live-bg {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            z-index: -1; pointer-events: none;
+            background: radial-gradient(circle, rgba(255,240,245,1) 0%, rgba(253,245,230,1) 100%);
+        }
+        .particle {
             position: absolute;
-            background: white;
+            background: rgba(212, 175, 55, 0.3);
             border-radius: 50%;
-            box-shadow: 0 0 10px 2px rgba(255, 255, 210, 0.6);
-            opacity: 0;
-            animation: floatUp 8s linear infinite;
+            animation: float 15s infinite linear;
         }
-        @keyframes floatUp {
-            0% { transform: translateY(100vh) scale(0); opacity: 0; }
-            50% { opacity: 0.8; }
-            100% { transform: translateY(-10vh) scale(1); opacity: 0; }
+        @keyframes float {
+            0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+            50% { opacity: 0.6; }
+            100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
         }
 
-        /* --- Main App Frame --- */
-        .app-frame {
-            position: relative;
-            width: 100%;
-            height: 100%;
-            max-width: 480px; /* Mobile width constraint */
-            background: rgba(255,255,255,0.45);
-            backdrop-filter: blur(15px); /* Glassmorphism */
-            box-shadow: 0 0 30px rgba(183, 110, 121, 0.2);
-            border: 1px solid rgba(255, 255, 255, 0.5);
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
+        /* --- 3. COUNTDOWN (Floating) --- */
+        .countdown-wrapper {
+            padding: 30px 20px 10px 20px;
+            display: flex; justify-content: center;
         }
+        .floating-countdown {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 15px 30px; border-radius: 50px;
+            box-shadow: 0 10px 25px rgba(212, 175, 55, 0.3);
+            border: 1px solid var(--gold);
+            display: flex; gap: 15px;
+            animation: floatItem 3s ease-in-out infinite;
+            backdrop-filter: blur(5px); max-width: 95%;
+        }
+        .timer-unit { text-align: center; min-width: 35px; }
+        .timer-val { font-family: var(--font-royal); font-weight: bold; font-size: 1.2rem; color: var(--gold); }
+        .timer-lbl { font-size: 0.5rem; text-transform: uppercase; letter-spacing: 1px; }
 
-        /* --- Slides --- */
-        .slide-container {
-            flex: 1;
-            position: relative;
-        }
+        @keyframes floatItem { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }
 
-        .slide {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 25px;
-            text-align: center;
-            opacity: 0;
-            transform: translateX(50px);
-            transition: all 0.6s cubic-bezier(0.25, 1, 0.5, 1);
-            pointer-events: none;
-        }
+        /* --- 4. HERO SECTION --- */
+        .hero { text-align: center; padding: 40px 20px; }
+        .ornament { font-size: 1.5rem; color: var(--gold); margin: 10px 0; opacity: 0.8; }
 
-        .slide.active {
-            opacity: 1;
-            transform: translateX(0);
-            pointer-events: all;
-        }
-
-        /* --- Typography --- */
-        .cursive-title {
-            font-family: var(--text-cursive);
-            font-size: 3.8rem;
-            color: var(--primary-color);
-            line-height: 1;
-            margin: 10px 0;
-            text-shadow: 2px 2px 4px rgba(255,255,255,0.8);
-        }
-
-        .formal-text {
-            font-family: var(--text-formal);
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            font-size: 0.9rem;
-            color: #888;
-        }
-
-        /* --- Elements --- */
-        .ornament-line {
-            height: 2px;
-            width: 100px;
-            background: linear-gradient(90deg, transparent, var(--accent-color), transparent);
-            margin: 20px auto;
-        }
-
-        /* --- Countdown --- */
-        .countdown-row {
-            display: flex;
-            gap: 15px;
-            margin: 20px 0;
-        }
-        .time-box {
-            background: rgba(255,255,255,0.8);
-            padding: 10px 15px;
-            border-radius: 12px;
-            border: 1px solid #eee;
-            min-width: 65px;
-        }
-        .time-box span {
-            font-family: var(--text-formal);
-            font-size: 1.2rem;
-            color: var(--primary-color);
-            font-weight: bold;
-        }
-        .time-box label {
-            font-size: 0.6rem;
-            text-transform: uppercase;
-            display: block;
-        }
-
-        /* --- Buttons --- */
-        .btn-primary {
-            background: linear-gradient(45deg, var(--primary-color), #dfa3ad);
-            color: white;
-            border: none;
-            padding: 12px 30px;
-            border-radius: 50px;
-            font-family: var(--text-formal);
-            font-size: 0.9rem;
-            cursor: pointer;
-            box-shadow: 0 5px 15px rgba(183, 110, 121, 0.3);
-            text-decoration: none;
-            display: inline-block;
-            margin-top: 15px;
-        }
-
-        .btn-calendar {
-            background: white;
-            color: var(--primary-color);
-            border: 1px solid var(--primary-color);
-            padding: 10px 20px;
-            border-radius: 50px;
-            font-size: 0.8rem;
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            margin-top: 20px;
-        }
-
-        /* --- Guestbook Form --- */
-        .guestbook-form {
-            background: rgba(255,255,255,0.7);
-            padding: 20px;
-            border-radius: 20px;
-            width: 100%;
-            margin-top: 20px;
-        }
-        .form-input {
-            width: 100%;
-            padding: 12px;
-            margin-bottom: 10px;
-            border: 1px solid #ddd;
-            border-radius: 10px;
-            background: rgba(255,255,255,0.9);
-            font-family: var(--text-body);
-        }
-
-        /* --- Navigation --- */
-        .nav-bar {
-            height: 70px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0 20px;
-            background: rgba(255,255,255,0.5);
-            border-top: 1px solid rgba(255,255,255,0.8);
-        }
-
-        .nav-dot {
-            height: 8px;
-            width: 8px;
-            background: #ccc;
-            border-radius: 50%;
-            display: inline-block;
-            margin: 0 3px;
-            transition: all 0.3s;
-        }
-        .nav-dot.active {
-            background: var(--primary-color);
-            width: 20px;
-            border-radius: 10px;
-        }
-
-        .control-btn {
-            background: none;
-            border: none;
-            color: var(--primary-color);
-            font-size: 1.5rem;
-            cursor: pointer;
+        /* NEW ROYAL FONT STYLE */
+        .couple-name {
+            font-family: var(--font-cursive);
+            font-size: 4rem; /* Increased size for Pinyon Script */
+            color: #800020;
+            line-height: 1.3;
+            text-shadow: 2px 2px 0px rgba(255,255,255,0.8);
+            margin: 5px 0;
+            font-weight: 500;
         }
         
-        .tab-menu {
-            display:flex; gap:10px; justify-content:center; margin-bottom:15px;
-        }
-        .tab-btn {
-            padding: 8px 15px;
-            border-radius: 20px;
-            border: 1px solid var(--primary-color);
-            background: transparent;
-            color: var(--primary-color);
-        }
-        .tab-btn.active {
-            background: var(--primary-color);
-            color: white;
+        .ampersand {
+            font-family: var(--font-cursive);
+            font-size: 3rem;
+            color: var(--gold);
+            margin: 10px 0;
         }
 
+        /* --- 5. CARDS & SECTIONS --- */
+        .family-card {
+            background: white; width: 90%; max-width: 500px; margin: 20px auto;
+            padding: 30px; border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+            border: 1px solid var(--gold-light);
+            text-align: center; position: relative;
+        }
+        .corner { position: absolute; width: 30px; height: 30px; border: 2px solid var(--gold); }
+        .tl { top: 10px; left: 10px; border-bottom: none; border-right: none; }
+        .tr { top: 10px; right: 10px; border-bottom: none; border-left: none; }
+        .bl { bottom: 10px; left: 10px; border-top: none; border-right: none; }
+        .br { bottom: 10px; right: 10px; border-top: none; border-left: none; }
+
+        .family-title {
+            font-family: var(--font-royal); color: var(--gold); font-size: 1.1rem;
+            margin-bottom: 15px; border-bottom: 1px dashed #ddd; display: inline-block; padding-bottom: 5px;
+        }
+        .family-header { font-size: 0.8rem; color: #888; font-style: italic; margin-bottom: 5px; }
+        .family-names { font-size: 1.1rem; margin-bottom: 20px; line-height: 1.4; font-weight: bold; color: #444; }
+
+        /* --- 6. TIMELINE --- */
+        .timeline-section { padding: 40px 20px; position: relative; max-width: 600px; margin: 0 auto; }
+        .timeline-line {
+            position: absolute; left: 30px; top: 20px; bottom: 20px;
+            width: 2px; background: var(--gold); opacity: 0.5;
+        }
+        .event-box {
+            margin-left: 40px; margin-bottom: 30px; background: white;
+            padding: 20px; border-radius: 0 15px 15px 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05); position: relative;
+            border-left: 4px solid var(--gold);
+        }
+        .event-dot {
+            position: absolute; left: -49px; top: 20px; width: 16px; height: 16px;
+            background: var(--gold); border: 3px solid white; border-radius: 50%;
+            box-shadow: 0 0 5px rgba(0,0,0,0.2);
+        }
+
+        /* --- 7. BUTTONS --- */
+        .btn-map {
+            display: inline-block; margin-top: 10px; padding: 8px 15px;
+            background-color: white; color: var(--gold); border: 1px solid var(--gold);
+            border-radius: 20px; text-decoration: none; font-size: 0.8rem;
+            font-weight: bold; transition: 0.3s;
+        }
+        .btn-map:hover { background-color: var(--gold); color: white; }
+
+        .wishes-container { text-align: center; margin: 40px 0; }
+        .wish-btn {
+            background: linear-gradient(45deg, var(--gold), #b89628); color: white; border: none;
+            padding: 15px 40px; border-radius: 50px; font-family: var(--font-royal);
+            font-size: 1rem; cursor: pointer; box-shadow: 0 10px 20px rgba(212, 175, 55, 0.4);
+            display: inline-flex; align-items: center; gap: 10px;
+        }
+        .counter-badge {
+            background: white; color: var(--gold); padding: 2px 8px;
+            border-radius: 10px; font-weight: bold; font-size: 0.9rem;
+        }
+
+        /* --- 8. FOOTER --- */
+        .footer-ornament {
+            text-align: center; padding: 40px; background: #fff;
+            border-top: 1px solid var(--gold-light); margin-top: 20px;
+        }
     </style>
 </head>
 <body>
 
-    <div id="sparkles"></div>
+    <div class="live-bg" id="particles"></div>
 
-    <div class="app-frame">
-        
-        <div class="slide-container">
-            
-            <div class="slide active" id="slide-0">
-                <div class="formal-text">We Are Getting Married</div>
-                <div class="ornament-line"></div>
-                <div class="cursive-title">Akash Singh</div>
-                <div style="font-family: var(--text-cursive); font-size: 2rem; color: #888;">&</div>
-                <div class="cursive-title">Tanu Chaudhary</div>
-                <div class="ornament-line"></div>
-                <div class="formal-text" style="color: var(--text-main); font-weight: bold;">
-                    February 21, 2026
-                </div>
-            </div>
-
-            <div class="slide" id="slide-1">
-                <h2 class="formal-text">The Big Day Is Coming</h2>
-                <div class="countdown-row">
-                    <div class="time-box"><span id="days">00</span><label>Days</label></div>
-                    <div class="time-box"><span id="hours">00</span><label>Hrs</label></div>
-                    <div class="time-box"><span id="mins">00</span><label>Mins</label></div>
-                    <div class="time-box"><span id="secs">00</span><label>Secs</label></div>
-                </div>
-
-                <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Akash+%26+Tanu+Wedding&dates=20260221T200000/20260222T040000&details=Join+us+to+celebrate+our+wedding!&location=Shubhaangan+Resort,+Mathura,+UP" 
-                   target="_blank" class="btn-calendar">
-                    <i class="far fa-calendar-plus"></i> Add to Calendar
-                </a>
-                
-                <p style="margin-top: 30px; font-style: italic; opacity: 0.7;">
-                    "Love is not about how many days, months, or years you have been together. Love is about how much you love each other every single day."
-                </p>
-            </div>
-
-            <div class="slide" id="slide-2">
-                <h2 class="cursive-title" style="font-size: 2.5rem;">The Celebrations</h2>
-                
-                <div class="tab-menu">
-                    <button class="tab-btn active" onclick="switchTab('sagai')">Lagan Sagai</button>
-                    <button class="tab-btn" onclick="switchTab('wedding')">Wedding</button>
-                </div>
-
-                <div id="sagai" class="guestbook-form" style="text-align:center;">
-                    <i class="fas fa-ring" style="font-size: 2rem; color: var(--accent-color); margin-bottom:10px;"></i>
-                    <h3>Feb 17, 2026</h3>
-                    <p>5:00 PM Onwards</p>
-                    <hr style="margin:10px 0; border:0; border-top:1px dashed #ccc;">
-                    <strong>Shree Ji Garden</strong>
-                    <p style="font-size:0.8rem;">Near Alahapur Flyover, Mathura</p>
-                    <a href="https://maps.google.com/?q=Shree+Ji+Garden+Mathura" target="_blank" class="btn-calendar" style="justify-content:center; margin-top:10px;">
-                        <i class="fas fa-map-marker-alt"></i> View Map
-                    </a>
-                </div>
-
-                <div id="wedding" class="guestbook-form" style="text-align:center; display:none;">
-                    <i class="fas fa-heart" style="font-size: 2rem; color: var(--accent-color); margin-bottom:10px;"></i>
-                    <h3>Feb 21, 2026</h3>
-                    <p>8:00 PM Onwards</p>
-                    <hr style="margin:10px 0; border:0; border-top:1px dashed #ccc;">
-                    <strong>Shubhaangan Resort</strong>
-                    <p style="font-size:0.8rem;">Laxmi Nagar, Mathura, UP</p>
-                    <a href="https://maps.google.com/?q=Shubhaangan+Resort+Mathura" target="_blank" class="btn-calendar" style="justify-content:center; margin-top:10px;">
-                        <i class="fas fa-map-marker-alt"></i> View Map
-                    </a>
-                </div>
-            </div>
-
-            <div class="slide" id="slide-3">
-                <div style="background: #FFF8E1; padding: 15px; border-radius: 15px; border: 1px dashed var(--accent-color); width:100%; margin-bottom: 20px;">
-                    <h3 style="font-family: var(--text-cursive); color: var(--primary-color);">Bal Aagrah</h3>
-                    <p style="font-size: 0.9rem;">"Melo bua ki shaadi mein jalul jalul aana!"</p>
-                    <small>- Little Champs</small>
-                </div>
-
-                <h2 class="formal-text">Digital Guestbook</h2>
-                <div class="guestbook-form">
-                    <input type="text" id="guestName" class="form-input" placeholder="Your Name">
-                    <textarea id="guestMsg" class="form-input" rows="2" placeholder="Write a wish for the couple..."></textarea>
-                    <button class="btn-primary" style="width:100%; margin-top:0;" onclick="sendWish()">
-                        <i class="fab fa-whatsapp"></i> Sign & Send
-                    </button>
-                </div>
-            </div>
-
-        </div>
-
-        <div class="nav-bar">
-            <button class="control-btn" onclick="prevSlide()"><i class="fas fa-chevron-left"></i></button>
-            
-            <div id="dots-container">
-                <span class="nav-dot active"></span>
-                <span class="nav-dot"></span>
-                <span class="nav-dot"></span>
-                <span class="nav-dot"></span>
-            </div>
-
-            <button class="control-btn" onclick="nextSlide()"><i class="fas fa-chevron-right"></i></button>
+    <div class="countdown-wrapper">
+        <div class="floating-countdown">
+            <div class="timer-unit"><div class="timer-val" id="d">00</div><div class="timer-lbl">Days</div></div>
+            <div class="timer-unit"><div class="timer-val">:</div></div>
+            <div class="timer-unit"><div class="timer-val" id="h">00</div><div class="timer-lbl">Hrs</div></div>
+            <div class="timer-unit"><div class="timer-val">:</div></div>
+            <div class="timer-unit"><div class="timer-val" id="m">00</div><div class="timer-lbl">Mins</div></div>
+            <div class="timer-unit"><div class="timer-val">:</div></div>
+            <div class="timer-unit"><div class="timer-val" id="s">00</div><div class="timer-lbl">Secs</div></div>
         </div>
     </div>
 
-    <script>
-        // --- Logic: Slider ---
-        let currentSlide = 0;
-        const slides = document.querySelectorAll('.slide');
-        const dots = document.querySelectorAll('.nav-dot');
+    <section class="hero">
+        <div class="ornament"><i class="fas fa-crown"></i></div>
+        <p style="font-family: var(--font-royal); letter-spacing: 2px; color: #888;">THE WEDDING OF</p>
+        
+        <div style="margin: 30px 0;">
+            <h1 class="couple-name">Divyansh Attri</h1>
+            <div class="ampersand">&</div>
+            <h1 class="couple-name">Trishna Chaudhary</h1>
+        </div>
 
-        function updateSlide() {
-            slides.forEach((slide, index) => {
-                slide.classList.remove('active');
-                dots[index].classList.remove('active');
-                if (index === currentSlide) {
-                    slide.classList.add('active');
-                    dots[index].classList.add('active');
-                }
-            });
-        }
+        <p style="font-family: var(--font-royal); font-weight: bold; margin-top: 20px; border-top: 1px solid var(--gold); border-bottom: 1px solid var(--gold); display: inline-block; padding: 10px 20px;">
+            FEBRUARY 21, 2026
+        </p>
+    </section>
 
-        function nextSlide() {
-            if (currentSlide < slides.length - 1) {
-                currentSlide++;
-                updateSlide();
-            }
-        }
-
-        function prevSlide() {
-            if (currentSlide > 0) {
-                currentSlide--;
-                updateSlide();
-            }
-        }
-
-        // --- Logic: Event Tabs ---
-        function switchTab(tabName) {
-            document.getElementById('sagai').style.display = 'none';
-            document.getElementById('wedding').style.display = 'none';
+    <div class="family-card">
+        <div class="corner tl"></div><div class="corner tr"></div>
+        <div class="corner bl"></div><div class="corner br"></div>
+        
+        <h3 class="family-title">Seeking Blessings From</h3>
+        
+        <div style="margin-top: 15px;">
+            <div class="family-header">Groom's Parents</div>
+            <div class="family-names">
+                Mr. Lakshman Singh<br>& Mrs. Devendri Devi
+            </div>
             
-            // Remove active class from buttons
-            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
-            // Add active class to clicked button
-            event.target.classList.add('active');
+            <div class="family-header">Bride's Parents</div>
+            <div class="family-names">
+                Mr. Premveer Singh<br>& Mrs. Manju Devi
+            </div>
+        </div>
+    </div>
 
-            document.getElementById(tabName).style.display = 'block';
+    <div class="wishes-container">
+        <button class="wish-btn" onclick="addWish()">
+            <i class="fas fa-heart"></i> Send Blessings 
+            <span class="counter-badge" id="wishCount">0</span>
+        </button>
+    </div>
+
+    <section class="timeline-section">
+        <h2 style="text-align: center; font-family: var(--font-royal); color: var(--gold); margin-bottom: 30px;">Wedding Events</h2>
+        <div class="timeline-line"></div>
+
+        <div class="event-box">
+            <div class="event-dot"></div>
+            <h3 style="color: #800020; font-family: var(--font-royal);">Lagan Sagai</h3>
+            <p style="font-weight: bold; color: #555; margin: 5px 0;">Feb 17, 2026 | 5:00 PM</p>
+            <p style="font-size: 0.9rem; color: #777;">Shree Ji Garden, Palwal</p>
+            <p style="font-size: 0.8rem; color: #999; margin-bottom: 10px;">Near Alahapur Flyover</p>
+            
+            <a href="https://www.google.com/maps/place/Shree+Ji+Garden/@28.1750942,77.3164553,16.42z/data=!4m14!1m7!3m6!1s0x390cd3b4d6659c99:0xc361031d959c1a62!2sShree+Ji+Garden!8m2!3d28.1487878!4d77.3319905!16s%2Fg%2F11f3wxhwgm!3m5!1s0x390cd163ca441c7f:0xb163a64399e239c5!8m2!3d28.1764281!4d77.3165319!16s%2Fg%2F11hbv1lxy4?entry=ttu&g_ep=EgoyMDI2MDEyOC4wIKXMDSoKLDEwMDc5MjA2N0gBUAM%3D" target="_blank" class="btn-map">
+                <i class="fas fa-map-marked-alt"></i> View Map
+            </a>
+        </div>
+
+        <div class="event-box">
+            <div class="event-dot"></div>
+            <h3 style="color: #800020; font-family: var(--font-royal);">The Wedding</h3>
+            <p style="font-weight: bold; color: #555; margin: 5px 0;">Feb 21, 2026 | 8:00 PM</p>
+            <p style="font-size: 0.9rem; color: #777;">Shubhaangan Resort, Mathura</p>
+            <p style="font-size: 0.8rem; color: #999; margin-bottom: 10px;">Laxmi Nagar, Mathura</p>
+            
+            <a href="https://www.google.com/maps/search/?api=1&query=Shubhaangan+Resort+Mathura" target="_blank" class="btn-map">
+                <i class="fas fa-map-marked-alt"></i> View Map
+            </a>
+        </div>
+    </section>
+
+    <div class="family-card" style="background: #FFF8E1;">
+        <div class="corner tl"></div><div class="corner tr"></div>
+        <div class="corner bl"></div><div class="corner br"></div>
+
+        <div style="display: flex; flex-direction: column; gap: 25px;">
+            <div>
+                <i class="fas fa-child" style="font-size: 2rem; color: var(--gold);"></i>
+                <h3 class="family-title" style="border: none; display: block; margin-top: 5px;">Special Invitation</h3>
+                <p style="font-family: var(--font-cursive); font-size: 2rem; color: #800020; line-height: 1.2;">
+                    "Humare Sir ki Shaadi mein Jrur Jrur Padharna"
+                </p>
+                <p style="font-size: 0.9rem; margin-top: 10px; font-weight: bold;">- All School Students</p>
+            </div>
+
+            <hr style="border: 0; border-top: 1px dashed #ccc;">
+
+            <div>
+                <h3 class="family-title" style="border: none;">RSVP</h3>
+                <p><strong>Divyansh Attri</strong>: +91 9466802733</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer-ornament">
+        <i class="fas fa-infinity" style="color: var(--gold);"></i>
+        <p style="font-size: 0.8rem; margin-top: 10px; color: #999;">Designed with love</p>
+    </div>
+
+    <script>
+        // Particles
+        function createParticles() {
+            const container = document.getElementById('particles');
+            for (let i = 0; i < 20; i++) {
+                const p = document.createElement('div');
+                p.classList.add('particle');
+                p.style.left = Math.random() * 100 + 'vw';
+                p.style.width = Math.random() * 10 + 5 + 'px';
+                p.style.height = p.style.width;
+                p.style.animationDuration = Math.random() * 10 + 10 + 's';
+                p.style.animationDelay = Math.random() * 5 + 's';
+                container.appendChild(p);
+            }
         }
+        createParticles();
 
-        // --- Logic: Countdown ---
+        // Countdown
         const weddingDate = new Date("Feb 21, 2026 20:00:00").getTime();
         setInterval(() => {
             const now = new Date().getTime();
             const diff = weddingDate - now;
-            document.getElementById("days").innerText = Math.floor(diff / (1000 * 60 * 60 * 24));
-            document.getElementById("hours").innerText = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            document.getElementById("mins").innerText = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-            document.getElementById("secs").innerText = Math.floor((diff % (1000 * 60)) / 1000);
+            document.getElementById("d").innerText = String(Math.floor(diff / (1000 * 60 * 60 * 24))).padStart(2, '0');
+            document.getElementById("h").innerText = String(Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))).padStart(2, '0');
+            document.getElementById("m").innerText = String(Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60))).padStart(2, '0');
+            document.getElementById("s").innerText = String(Math.floor((diff % (1000 * 60)) / 1000)).padStart(2, '0');
         }, 1000);
 
-        // --- Logic: Guestbook (WhatsApp Integration) ---
-        function sendWish() {
-            const name = document.getElementById('guestName').value;
-            const msg = document.getElementById('guestMsg').value;
-            
-            if(!name || !msg) {
-                alert("Please enter your name and a message!");
-                return;
-            }
-
-            // Encodes text for URL
-            const finalMsg = encodeURIComponent(`*Guestbook Entry* 📖\n\nName: ${name}\nMessage: ${msg}\n\nCongratulations Akash & Tanu! 🎉`);
-            
-            // Your Phone Number
-            window.open(`https://wa.me/919466802733?text=${finalMsg}`, '_blank');
+        // Wishes
+        let count = localStorage.getItem('weddingWishes') || 0;
+        document.getElementById('wishCount').innerText = count;
+        function addWish() {
+            count++;
+            document.getElementById('wishCount').innerText = count;
+            localStorage.setItem('weddingWishes', count);
+            const btn = document.querySelector('.wish-btn');
+            const heart = document.createElement('i');
+            heart.classList.add('fas', 'fa-heart');
+            heart.style.position = 'absolute'; heart.style.color = 'white';
+            heart.style.left = '50%'; heart.style.top = '50%';
+            heart.style.transform = 'translate(-50%, -50%)'; heart.style.transition = 'all 1s';
+            btn.appendChild(heart);
+            setTimeout(() => { heart.style.top = '-50px'; heart.style.opacity = '0'; }, 50);
+            setTimeout(() => heart.remove(), 1000);
         }
-
-        // --- Logic: Sparkles ---
-        function createSparkle() {
-            const sparkle = document.createElement('div');
-            sparkle.classList.add('sparkle');
-            sparkle.style.left = Math.random() * 100 + "vw";
-            const size = Math.random() * 5 + 2;
-            sparkle.style.width = size + "px";
-            sparkle.style.height = size + "px";
-            sparkle.style.animationDuration = Math.random() * 5 + 5 + "s";
-            document.getElementById('sparkles').appendChild(sparkle);
-            setTimeout(() => sparkle.remove(), 10000);
-        }
-        setInterval(createSparkle, 500);
-
     </script>
 </body>
 </html>
